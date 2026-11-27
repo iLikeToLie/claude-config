@@ -1,19 +1,17 @@
 #!/usr/bin/env bash
 # Cloud environment setup script: restores user-level ~/.claude from this repo.
-# Env vars required: CFG_REPO (e.g. you/claude-config); repo is public
+# Run from a clone of this repo (bash /tmp/cc/setup.sh)
 set -u
 CLAUDE_DIR="$HOME/.claude"
 mkdir -p "$CLAUDE_DIR"
-tmp=$(mktemp -d)
-git clone --depth 1 "https://github.com/${CFG_REPO}.git" "$tmp/cfg" || { echo "config clone failed"; exit 0; }
-cp -r "$tmp/cfg/skills" "$tmp/cfg/rules" "$tmp/cfg/CLAUDE.md" "$CLAUDE_DIR/"
+cfg="$(cd "$(dirname "$0")" && pwd)"
+cp -r "$cfg/skills" "$cfg/rules" "$cfg/CLAUDE.md" "$CLAUDE_DIR/"
 # merge settings: keep existing keys, config repo wins
 if [ -f "$CLAUDE_DIR/settings.json" ]; then
-  node -e 'const fs=require("fs");const a=JSON.parse(fs.readFileSync(process.argv[1]));const b=JSON.parse(fs.readFileSync(process.argv[2]));fs.writeFileSync(process.argv[1],JSON.stringify({...a,...b},null,2))' "$CLAUDE_DIR/settings.json" "$tmp/cfg/settings.json"
+  node -e 'const fs=require("fs");const a=JSON.parse(fs.readFileSync(process.argv[1]));const b=JSON.parse(fs.readFileSync(process.argv[2]));fs.writeFileSync(process.argv[1],JSON.stringify({...a,...b},null,2))' "$CLAUDE_DIR/settings.json" "$cfg/settings.json"
 else
-  cp "$tmp/cfg/settings.json" "$CLAUDE_DIR/settings.json"
+  cp "$cfg/settings.json" "$CLAUDE_DIR/settings.json"
 fi
-rm -rf "$tmp"
 # CLIs (best effort)
 npm i -g ctx7 @openai/codex 2>/dev/null || true
 # Plugins (best effort; enabledPlugins in settings.json also triggers install)

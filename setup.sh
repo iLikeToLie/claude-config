@@ -12,6 +12,7 @@ if [ -f "$CLAUDE_DIR/settings.json" ]; then
 else
   cp "$cfg/settings.json" "$CLAUDE_DIR/settings.json"
 fi
+echo "CFG COPIED:"; ls "$CLAUDE_DIR/skills"; ls -la "$CLAUDE_DIR/settings.json"; date
 # CLIs (best effort)
 npm i -g ctx7 @openai/codex 2>/dev/null || true
 # Plugins (best effort; enabledPlugins in settings.json also triggers install)

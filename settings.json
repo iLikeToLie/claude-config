@@ -1,0 +1,68 @@
+{
+  "model": "sonnet",
+  "env": {
+    "TOKEN_OPTIMIZER_STATUS_BAR": "0",
+    "CLAUDE_CODE_SUBAGENT_MODEL": "sonnet"
+  },
+  "skillOverrides": {
+    "explainer": "off",
+    "find-docs": "off",
+    "hf-cli": "off",
+    "synced": "off",
+    "walkthrough": "off",
+    "dataviz": "off",
+    "loop": "off",
+    "schedule": "off",
+    "simplify": "off",
+    "plugin-authoring": "off",
+    "init": "off",
+    "security-review": "off",
+    "fewer-permission-prompts": "off"
+  },
+  "enabledPlugins": {
+    "superpowers@superpowers-marketplace": true,
+    "context-mode@context-mode": true,
+    "ui-ux-pro-max@ui-ux-pro-max-skill": true,
+    "token-optimizer@alexgreensh-token-optimizer": true,
+    "horizon@horizon": true,
+    "codex@openai-codex": true
+  },
+  "extraKnownMarketplaces": {
+    "superpowers-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "obra/superpowers-marketplace"
+      }
+    },
+    "context-mode": {
+      "source": {
+        "source": "github",
+        "repo": "mksglu/context-mode"
+      }
+    },
+    "ui-ux-pro-max-skill": {
+      "source": {
+        "source": "github",
+        "repo": "nextlevelbuilder/ui-ux-pro-max-skill"
+      }
+    },
+    "alexgreensh-token-optimizer": {
+      "source": {
+        "source": "github",
+        "repo": "alexgreensh/token-optimizer"
+      }
+    },
+    "horizon": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/iLikeToLie/Horizon.git"
+      }
+    },
+    "openai-codex": {
+      "source": {
+        "source": "github",
+        "repo": "openai/codex-plugin-cc"
+      }
+    }
+  }
+}

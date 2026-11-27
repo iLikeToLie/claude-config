@@ -20,7 +20,6 @@
     "fewer-permission-prompts": "off"
   },
   "enabledPlugins": {
-    "superpowers@superpowers-marketplace": true,
     "context-mode@context-mode": true,
     "ui-ux-pro-max@ui-ux-pro-max-skill": true,
     "token-optimizer@alexgreensh-token-optimizer": true,
@@ -28,12 +27,6 @@
     "codex@openai-codex": true
   },
   "extraKnownMarketplaces": {
-    "superpowers-marketplace": {
-      "source": {
-        "source": "github",
-        "repo": "obra/superpowers-marketplace"
-      }
-    },
     "context-mode": {
       "source": {
         "source": "github",

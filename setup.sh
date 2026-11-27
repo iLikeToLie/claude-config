@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 # Cloud environment setup script: restores user-level ~/.claude from this repo.
-# Env vars required: CFG_TOKEN (read-only GitHub token for this repo), CFG_REPO (e.g. you/claude-config)
+# Env vars required: CFG_DEPLOY_KEY (private SSH deploy key, read-only), CFG_REPO (e.g. you/claude-config)
 set -u
 CLAUDE_DIR="$HOME/.claude"
 mkdir -p "$CLAUDE_DIR"
 tmp=$(mktemp -d)
-git clone --depth 1 "https://x-access-token:${CFG_TOKEN}@github.com/${CFG_REPO}.git" "$tmp/cfg" || { echo "config clone failed"; exit 0; }
+keyf="$tmp/key"; printf '%s
+' "$CFG_DEPLOY_KEY" > "$keyf"; chmod 600 "$keyf"
+GIT_SSH_COMMAND="ssh -i $keyf -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new"   git clone --depth 1 "git@github.com:${CFG_REPO}.git" "$tmp/cfg" || { echo "config clone failed"; exit 0; }
 cp -r "$tmp/cfg/skills" "$tmp/cfg/rules" "$tmp/cfg/CLAUDE.md" "$CLAUDE_DIR/"
 # merge settings: keep existing keys, config repo wins
 if [ -f "$CLAUDE_DIR/settings.json" ]; then

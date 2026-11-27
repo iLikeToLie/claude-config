@@ -5,7 +5,7 @@ set -u
 CLAUDE_DIR="$HOME/.claude"
 mkdir -p "$CLAUDE_DIR"
 tmp=$(mktemp -d)
-keyf="$tmp/key"; printf '%s
+keyf="$tmp/key"; printf '%b
 ' "$CFG_DEPLOY_KEY" > "$keyf"; chmod 600 "$keyf"
 GIT_SSH_COMMAND="ssh -i $keyf -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new"   git clone --depth 1 "git@github.com:${CFG_REPO}.git" "$tmp/cfg" || { echo "config clone failed"; exit 0; }
 cp -r "$tmp/cfg/skills" "$tmp/cfg/rules" "$tmp/cfg/CLAUDE.md" "$CLAUDE_DIR/"
